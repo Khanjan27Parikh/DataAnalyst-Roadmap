@@ -1,0 +1,40 @@
+Solutions :
+
+1.Top 10 countries by number of purchases
+
+SELECT Country, COUNT(*) AS Total_Orders
+FROM ecommerce_data
+GROUP BY Country
+ORDER BY Total_Orders DESC
+LIMIT 10;
+
+2.Most sold products (by quantity)
+
+SELECT Description, SUM(Quantity) AS Total_Quantity
+FROM ecommerce_data
+GROUP BY Description
+ORDER BY Total_Quantity DESC
+LIMIT 10;
+
+3.Total revenue per product
+
+SELECT Description, SUM(Quantity * UnitPrice) AS Revenue
+FROM ecommerce_data
+GROUP BY Description
+ORDER BY Revenue DESC
+LIMIT 10;
+
+4.Number of orders by month
+
+SELECT strftime('%Y-%m', InvoiceDate) AS Month, COUNT(DISTINCT InvoiceNo) AS Orders
+FROM ecommerce_data
+GROUP BY Month
+ORDER BY Month;
+
+5.Top customers by total spend
+
+SELECT CustomerID, SUM(Quantity * UnitPrice) AS TotalSpent
+FROM ecommerce_data
+GROUP BY CustomerID
+ORDER BY TotalSpent DESC
+LIMIT 10;
